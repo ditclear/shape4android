@@ -1,4 +1,5 @@
 # shape4android
+> 使用Vue快速生成Android的背景xml
 
 ## Project setup
 ```
@@ -24,6 +25,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
