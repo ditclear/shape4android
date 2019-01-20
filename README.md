@@ -25,6 +25,8 @@ selector：`selector_shape_n_color_p_pressedColor_u_unableColor.xml`
 
 > PS:如果自定义名称，那么selector中的shape默认会跟上type名，比如xx_norm.xml/xx_pressed.xml/xx_unable.xml
 
+Inspired by  [inloop/shadow4android](http://inloop.github.io/shadow4android/)
+
 #### License
 
 The MIT License
