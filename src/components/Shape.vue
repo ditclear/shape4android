@@ -2,6 +2,9 @@
   <el-container>
     <el-header class="header">
       <span class="headertitle">Shape4Android..</span>
+      <div class="ribbon right grey hidden-xs" style="z-index: 999">
+        <a href="https://github.com/ditclear/shape4android">Fork me on GitHub</a>
+      </div>
     </el-header>
     <el-container>
       <el-aside width="600px">
@@ -510,5 +513,44 @@ export default {
 }
 p {
   font-family: "Helvetica Neue";
+}
+.ribbon {
+    position: absolute;
+    top: 42px;
+    width: 200px;
+    padding: 1px 0;
+    background: #000;
+    font-family: "Helvetica Neue";
+    color: #eee;
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.ribbon.grey {
+    background: #888;
+}
+.ribbon.right {
+    right: -42px;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.ribbon a, .ribbon a:visited, .ribbon a:active, .ribbon a:hover {
+    display: block;
+    padding: 1px 0;
+    height: 24px;
+    line-height: 24px;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Cabin Condensed',sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.3);
+    -moz-text-shadow: 0 0 10px rgba(0,0,0,0.31);
+    -webkit-text-shadow: 0 0 10px rgba(0,0,0,0.31);
+    text-shadow: 0 0 10px rgba(0,0,0,0.31);
 }
 </style>
