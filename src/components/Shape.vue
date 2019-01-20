@@ -1,6 +1,8 @@
 <template>
   <el-container>
-    <el-header>Shape4Android</el-header>
+    <el-header class="header">
+      <span class="headertitle">Shape4Android..</span>
+    </el-header>
     <el-container>
       <el-aside width="600px">
         <el-col :span="16">
@@ -18,135 +20,152 @@
           'border-bottom-left-radius':realRoundBL+'px','border-bottom-right-radius':realRoundBR+'px'}"
         ></div>
       </el-aside>
+
       <el-main>
-        <div>
-          <div style="margin: 20px;"></div>
-          <el-form :label-position="labelPosition" :model="result">
-            <el-form-item>
-              <el-col :span="3">
-                <el-checkbox checked disabled>normal</el-checkbox>
-              </el-col>
-            </el-form-item>
-            <el-form-item label>
-              <el-col :span="3">形状</el-col>
-              <el-col :span="5">
-                <el-select v-model="result.shape" placeholder="请选择">
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  ></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="3">颜色：</el-col>
-              <el-col :span="1">
-                <el-color-picker v-model="result.color"></el-color-picker>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-col :span="3">角度</el-col>
-              <el-col :span="5">
-                <el-input v-model="result.round" :disabled="!simpleRound">
-                  <template slot="append">dp</template>
-                </el-input>
-              </el-col>
-              <el-col :span="3">
-                <el-button
-                  type="text"
-                  @click="simpleRound=!simpleRound"
-                >[{{!simpleRound?'simple':'advanced'}}]</el-button>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-form-item>
-                <el-col>
-                  <el-collapse-transition>
-                    <div v-show="!simpleRound">
-                      <el-col :span="3">左上角</el-col>
-                      <el-col :span="5">
-                        <el-input v-model="result.round_tl">
-                          <template slot="append">dp</template>
-                        </el-input>
-                      </el-col>
-                      <el-col :span="3">左下角</el-col>
-                      <el-col :span="5">
-                        <el-input v-model="result.round_tr">
-                          <template slot="append">dp</template>
-                        </el-input>
-                      </el-col>
-                      <el-col>
-                        <el-col :span="3">右上角</el-col>
-                        <el-col :span="5">
-                          <el-input v-model="result.round_bl">
-                            <template slot="append">dp</template>
-                          </el-input>
-                        </el-col>
-                        <el-col :span="3">右下角</el-col>
-                        <el-col :span="5">
-                          <el-input v-model="result.round_br">
-                            <template slot="append">dp</template>
-                          </el-input>
-                        </el-col>
-                      </el-col>
-                    </div>
-                  </el-collapse-transition>
-                </el-col>
-              </el-form-item>
-            </el-form-item>
-            <el-form-item label>
-              <el-col :span="3">边框</el-col>
-              <el-col :span="5">
-                <el-input v-model="result.border_width">
-                  <template slot="append">dp</template>
-                </el-input>
-              </el-col>
-              <el-col class="line" :span="3">边框颜色：</el-col>
-              <el-col :span="1">
-                <el-color-picker v-model="result.border_color"></el-color-picker>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-col :span="3">
-                <el-checkbox v-model="needPresse">pressed</el-checkbox>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-col>
-                <el-collapse-transition>
-                  <div v-show="needPresse">
-                    <el-col :span="3">颜色</el-col>
-                    <el-col :span="1">
-                      <el-color-picker v-model="pressed.color"></el-color-picker>
+        <el-container>
+          <el-main>
+            <div>
+              <div style="margin: 20px;"></div>
+              <el-form :label-position="labelPosition" :model="result">
+                <el-form-item>
+                  <el-col :span="3">
+                    <el-checkbox checked disabled>normal</el-checkbox>
+                  </el-col>
+                </el-form-item>
+                <el-form-item label>
+                  <el-col :span="3">形状</el-col>
+                  <el-col :span="5">
+                    <el-select v-model="result.shape" placeholder="请选择">
+                      <el-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-col>
+                  <el-col :span="3">颜色：</el-col>
+                  <el-col :span="1">
+                    <el-color-picker v-model="result.color"></el-color-picker>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col :span="3">角度</el-col>
+                  <el-col :span="5">
+                    <el-input v-model="result.round" :disabled="!simpleRound">
+                      <template slot="append">dp</template>
+                    </el-input>
+                  </el-col>
+                  <el-col :span="3">
+                    <el-button
+                      type="text"
+                      @click="simpleRound=!simpleRound"
+                    >[{{!simpleRound?'simple':'advanced'}}]</el-button>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-form-item>
+                    <el-col>
+                      <el-collapse-transition>
+                        <div v-show="!simpleRound">
+                          <el-col :span="3">左上角</el-col>
+                          <el-col :span="5">
+                            <el-input v-model="result.round_tl">
+                              <template slot="append">dp</template>
+                            </el-input>
+                          </el-col>
+                          <el-col :span="3">左下角</el-col>
+                          <el-col :span="5">
+                            <el-input v-model="result.round_tr">
+                              <template slot="append">dp</template>
+                            </el-input>
+                          </el-col>
+                          <el-col>
+                            <el-col :span="3">右上角</el-col>
+                            <el-col :span="5">
+                              <el-input v-model="result.round_bl">
+                                <template slot="append">dp</template>
+                              </el-input>
+                            </el-col>
+                            <el-col :span="3">右下角</el-col>
+                            <el-col :span="5">
+                              <el-input v-model="result.round_br">
+                                <template slot="append">dp</template>
+                              </el-input>
+                            </el-col>
+                          </el-col>
+                        </div>
+                      </el-collapse-transition>
                     </el-col>
-                  </div>
-                </el-collapse-transition>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-col :span="3">
-                <el-checkbox v-model="needUnable">unable</el-checkbox>
-              </el-col>
-            </el-form-item>
-            <el-form-item>
-              <el-col>
-                <el-collapse-transition>
-                  <div v-show="needUnable">
-                    <el-col :span="3">颜色</el-col>
-                    <el-col :span="1">
-                      <el-color-picker v-model="unable.color"></el-color-picker>
-                    </el-col>
-                  </div>
-                </el-collapse-transition>
-              </el-col>
-            </el-form-item>
-          </el-form>
-        </div>
+                  </el-form-item>
+                </el-form-item>
+                <el-form-item label>
+                  <el-col :span="3">边框</el-col>
+                  <el-col :span="5">
+                    <el-input v-model="result.border_width">
+                      <template slot="append">dp</template>
+                    </el-input>
+                  </el-col>
+                  <el-col class="line" :span="3">边框颜色：</el-col>
+                  <el-col :span="1">
+                    <el-color-picker v-model="result.border_color"></el-color-picker>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col :span="3">
+                    <el-checkbox v-model="needPresse">pressed</el-checkbox>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col>
+                    <el-collapse-transition>
+                      <div v-show="needPresse">
+                        <el-col :span="3">颜色</el-col>
+                        <el-col :span="1">
+                          <el-color-picker v-model="pressed.color"></el-color-picker>
+                        </el-col>
+                      </div>
+                    </el-collapse-transition>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col :span="3">
+                    <el-checkbox v-model="needUnable">unable</el-checkbox>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col>
+                    <el-collapse-transition>
+                      <div v-show="needUnable">
+                        <el-col :span="3">颜色</el-col>
+                        <el-col :span="1">
+                          <el-color-picker v-model="unable.color"></el-color-picker>
+                        </el-col>
+                      </div>
+                    </el-collapse-transition>
+                  </el-col>
+                </el-form-item>
+                <el-form-item>
+                  <el-col span="3">
+                    <el-button type="primary" icon="el-icon-download" @click="saveAsXml">下载</el-button>
+                  </el-col>
+                </el-form-item>
+                <el-form-item label="命名规则"></el-form-item>
+                <el-form-item label="shape:" label-width="100px">
+                  <el-col
+                    span="5"
+                  >shape_type_color_roundTL_roundTR_roundBL_roundBR_borderWidth_borderColor.xml</el-col>
+                </el-form-item>
+
+                <el-form-item label="selector:" label-width="100px">
+                  <el-col span="5" top>selector_shape_n_color_p_pressedColor_u_unableColor.xml</el-col>
+                </el-form-item>
+              </el-form>
+            </div>
+          </el-main>
+        </el-container>
       </el-main>
     </el-container>
-    <el-footer>
-      <el-button type="primary" icon="el-icon-download" @click="saveAsXml">下载</el-button>
-    </el-footer>
   </el-container>
 </template>
 
@@ -192,6 +211,11 @@ export default {
       unable: {
         color: "#409EFF"
       }
+    };
+  },
+  mounted() {
+    this.$refs.range.oninput = ({ target: { value } }) => {
+      this.width = `${60 + value * 0.4}%`;
     };
   },
   computed: {
@@ -351,7 +375,8 @@ export default {
         this.wrapWithQuote("false") +
         "/>\n";
 
-      var fileName = "selector_" + this.result.shape;
+      var fileName =
+        "selector_" + this.result.shape + "_n_" + this.result.color.slice(1, 7);
 
       if (this.needPresse) {
         selectorXml +=
@@ -417,6 +442,38 @@ export default {
 </script>
 
 <style>
+.header {
+  font-family: "Helvetica Neue";
+  min-height: 150px;
+  font-style: inherit;
+  text-align: center;
+  display: flex;
+  background-color: #64b587;
+}
+.headertitle {
+  margin: auto;
+  color: white;
+  display: inline-block;
+  width: 21ch;
+  font: bold 200% Consolas, Monaco, monospace; /*Monospaced font*/
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 500;
+  border-right: 1px solid transparent;
+  animation: typing 10s steps(21), caret 0.5s steps(1) infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+@keyframes caret {
+  50% {
+    border-right-color: currentColor;
+  }
+}
+
 .result {
   max-width: 200px;
   margin-top: 100px;
@@ -450,5 +507,8 @@ export default {
   padding: 40px 20px;
   box-sizing: border-box;
   margin-right: 20px;
+}
+p {
+  font-family: "Helvetica Neue";
 }
 </style>
