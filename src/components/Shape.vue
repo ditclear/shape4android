@@ -18,7 +18,7 @@
         <div
           class="result"
           v-bind:style="{'background': realColor ,'border-radius':realRound+'px',
-          'border': normal.border_width + 'px solid '+normal.border_color ,
+          'border': normal.border_width + 'px '+dashOrSolid+' '+normal.border_color ,
           'border-top-left-radius':realRoundTL+'px','border-top-right-radius':realRoundTR+'px',
           'border-bottom-left-radius':realRoundBL+'px','border-bottom-right-radius':realRoundBR+'px'}"
         ></div>
@@ -77,14 +77,14 @@
                               <template slot="append">dp</template>
                             </el-input>
                           </el-col>
-                          <el-col :span="3">左下角</el-col>
+                          <el-col :span="3">右上角</el-col>
                           <el-col :span="5">
                             <el-input v-model="normal.round_tr">
                               <template slot="append">dp</template>
                             </el-input>
                           </el-col>
                           <el-col>
-                            <el-col :span="3">右上角</el-col>
+                            <el-col :span="3">左下角</el-col>
                             <el-col :span="5">
                               <el-input v-model="normal.round_bl">
                                 <template slot="append">dp</template>
@@ -112,6 +112,9 @@
                   <el-col class="line" :span="3">边框颜色：</el-col>
                   <el-col :span="1">
                     <el-color-picker v-model="normal.border_color"></el-color-picker>
+                  </el-col>
+                  <el-col :span="4">
+                    <el-checkbox v-model="dashed">虚线</el-checkbox>
                   </el-col>
                 </el-form-item>
                 <el-form-item>
@@ -220,6 +223,7 @@ export default {
       needPresse: false, //需要pressed文件
       needUnable: false, //需要unable文件
       simpleRound: true, //统一使用相同的圆角
+      dashed: false, //边框虚线
       options: [
         //形状，oval or rectangle
         {
@@ -297,6 +301,9 @@ export default {
       }
       return this.normal.round_br;
     },
+    dashOrSolid() {
+      return this.dashed ? "dashed" : "solid";
+    },
     realColor: function() {
       if (this.tabPosition == "pressed" && this.needPresse) {
         return this.pressed.color;
@@ -332,8 +339,16 @@ export default {
         "<stroke android:color=" +
         this.wrapWithQuote(this.normal.border_color) +
         " android:width=" +
-        this.wrapWithQuote(this.normal.border_width + "dp") +
-        "/>\n";
+        this.wrapWithQuote(this.normal.border_width + "dp");
+      if (this.dashed) {
+        xml +=
+          " android:dashGap=" +
+          this.wrapWithQuote("3dp") +
+          " android:dashWidth=" +
+          this.wrapWithQuote("3dp");
+      }
+
+      xml += "/>\n";
       if (this.normal.shape != "oval") {
         xml +=
           "<corners " +
